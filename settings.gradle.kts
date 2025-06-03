@@ -1,0 +1,2 @@
+rootProject.name = "beta-orebfuscator"
+
