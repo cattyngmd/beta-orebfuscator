@@ -10,15 +10,10 @@ public class OrbfuscatorNetServerHandler
 
     public void sendPacket(Packet packet) {
         if (packet instanceof Packet51MapChunk) {
-            if (packet.k) {
-                if (!OrebfuscatorCalculationThread.isRunning()) {
-                    OrebfuscatorCalculationThread.startThread();
-                }
-                OrebfuscatorCalculationThread.Queue((Packet51MapChunk) packet, this.getPlayer());
-            } else {
-                packet.k = true;
-                super.sendPacket(packet);
+            if (!OrebfuscatorCalculationThread.CheckThreads()) {
+                OrebfuscatorCalculationThread.SyncThreads();
             }
+            OrebfuscatorCalculationThread.Queue((Packet51MapChunk) packet, this.getPlayer());
         } else {
             super.sendPacket(packet);
         }

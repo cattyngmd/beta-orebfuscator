@@ -1,11 +1,10 @@
 package lishid.orebfuscator;
 
 import lishid.orebfuscator.utils.Calculations;
+import lishid.orebfuscator.utils.OrebfuscatorConfig;
 import org.bukkit.block.Block;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.EntityListener;
-
-import java.util.ArrayList;
 
 public class OrebfuscatorEntityListener
         extends EntityListener {
@@ -19,12 +18,8 @@ public class OrebfuscatorEntityListener
         if (event.isCancelled() || !OrebfuscatorConfig.UpdateOnExplosion() || !OrebfuscatorConfig.Enabled()) {
             return;
         }
-        ArrayList<Block> blocks = new ArrayList<Block>();
         for (Block block : event.blockList()) {
-            Calculations.GetAjacentBlocks(block.getWorld(), blocks, block, 1);
-        }
-        for (Block block : blocks) {
-            Calculations.UpdateBlock(block);
+            Calculations.UpdateBlocksNearby(block);
         }
     }
 }

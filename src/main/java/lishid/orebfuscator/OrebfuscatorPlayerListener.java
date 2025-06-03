@@ -2,6 +2,7 @@ package lishid.orebfuscator;
 
 import lishid.orebfuscator.utils.Calculations;
 import lishid.orebfuscator.utils.OrbfuscatorNetServerHandler;
+import lishid.orebfuscator.utils.OrebfuscatorConfig;
 import net.minecraft.server.NetServerHandler;
 import net.minecraft.server.NetworkManager;
 import org.bukkit.Bukkit;
@@ -19,9 +20,9 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.lang.reflect.Field;
 
-public class OrebfuscatorPlayerListener
-        extends PlayerListener {
+public class OrebfuscatorPlayerListener extends PlayerListener {
     private static final double MAX_REACH_DIST_SQR = 5 * 5;
+
     Orebfuscator plugin;
 
     public OrebfuscatorPlayerListener(Orebfuscator plugin) {
@@ -33,7 +34,7 @@ public class OrebfuscatorPlayerListener
     }
 
     public void onPlayerQuit(PlayerQuitEvent event) {
-        OrebfuscatorBlockListener.playerLog.remove(event.getPlayer());
+        OrebfuscatorBlockListener.blockLog.remove(event.getPlayer().getName());
     }
 
     public void onPlayerInteract(PlayerInteractEvent event) {
@@ -55,7 +56,7 @@ public class OrebfuscatorPlayerListener
         try {
             this.updateNetServerHandler(player);
         } catch (Exception e) {
-            System.out.println("Error updating NerServerHandler.");
+            System.out.println("[Orebfuscator] Error updating NerServerHandler.");
             e.printStackTrace();
         }
     }

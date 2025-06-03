@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "lishid"
-version = "0.9.1"
+version = "1.0.0"
 
 val poseidon_version: String by project
 
